@@ -70,7 +70,7 @@ public class Emisor {
                         int[] movimiento = function.encontrarMejorMovimiento(tablero, "C");
                         
                         String jugada = "Fila: " + movimiento[0] + ", Columna: " + movimiento[1];
-                        this.anunciarJugada(jugada);
+                        this.anunciarJugada(movimiento[1]);
                         
                         System.out.println("\nPróxima Jugada:");
                         System.out.println(jugada);
