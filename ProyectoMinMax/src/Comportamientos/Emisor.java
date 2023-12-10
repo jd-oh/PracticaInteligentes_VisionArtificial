@@ -25,7 +25,7 @@ public class Emisor {
     String respuesta;
 
     public Emisor() {
-        
+
     }
 
     public String getRespuesta() {
@@ -58,44 +58,43 @@ public class Emisor {
 
                 // Guardar la respuesta en la variable "respuesta"
                 respuesta = response.toString();
-                
+
                 ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            List<List<String>> tablero = objectMapper.readValue(respuesta, List.class);
-            MinMaxFunctions function = new MinMaxFunctions();
+                try {
+                    List<List<String>> tablero = objectMapper.readValue(respuesta, List.class);
+                    MinMaxFunctions function = new MinMaxFunctions();
 
-            // Imprimir el tablero
-            System.out.println("Tablero Actual:");
-            imprimirTablero(tablero);
+                    // Imprimir el tablero
+                    System.out.println("Tablero Actual:");
+                    imprimirTablero(tablero);
 
-            // Calcular la próxima jugada usando el algoritmo minimax
-            int[] movimiento = function.encontrarMejorMovimiento(tablero, "C");
+                    // Calcular la próxima jugada usando el algoritmo minimax
+                    int[] movimiento = function.encontrarMejorMovimiento(tablero, "C");
 
-            // Imprimir la próxima jugada
-            System.out.println("\nPróxima Jugada:");
-            System.out.println("Fila: " + movimiento[0] + ", Columna: " + movimiento[1]);
+                    // Imprimir la próxima jugada
+                    System.out.println("\nPróxima Jugada:");
+                    System.out.println("Fila: " + movimiento[0] + ", Columna: " + movimiento[1]);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-            
-        } else {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
                 System.out.println("La solicitud GET no fue exitosa. Código de respuesta: " + responseCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void anunciarJugada(){
-        
+
+    public void anunciarJugada() {
+
     }
-    
-     private static void imprimirTablero(List<List<String>> tablero) {
+
+    private static void imprimirTablero(List<List<String>> tablero) {
         for (List<String> fila : tablero) {
             System.out.println(fila);
         }
     }
-
 
 }
