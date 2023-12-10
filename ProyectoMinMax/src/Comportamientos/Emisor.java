@@ -70,7 +70,7 @@ public class Emisor {
                         int[] movimiento = function.encontrarMejorMovimiento(tablero, "C");
                         
                         String jugada = "Fila: " + movimiento[0] + ", Columna: " + movimiento[1];
-                        this.anunciarJugada(movimiento[1]);
+                        this.anunciarJugada(""+movimiento[1]);
                         
                         System.out.println("\nPróxima Jugada:");
                         System.out.println(jugada);
@@ -100,10 +100,10 @@ public class Emisor {
             // Habilitar el envío de datos
             con.setDoOutput(true);
 
-            // Datos que deseas enviar en el cuerpo de la solicitud (cambia según tus necesidades)
+            
             String datos = "{\"mensaje\":\"" + jugada + "\"}";
 
-            // Obtener el flujo de salida y escribir los datos en el cuerpo de la solicitud
+            
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = datos.getBytes("utf-8");
                 os.write(input, 0, input.length);
