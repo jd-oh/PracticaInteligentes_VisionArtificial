@@ -22,7 +22,7 @@ import java.io.OutputStream;
  */
 public class Emisor {
 
-    String respuesta;
+    String respuesta = "";
 
     public Emisor() {
 
@@ -54,7 +54,7 @@ public class Emisor {
                 }
                 in.close();
 
-                if (!respuesta.equalsIgnoreCase(response.toString())) {
+                if (respuesta.equalsIgnoreCase(response.toString())) {
 
                     respuesta = response.toString();
 
