@@ -104,7 +104,7 @@ def run_flask_app():
 
     app.run(host='localhost', port=5000)
 
-# Crea una interfaz de usuario
+# Crea un botón para actualizar la cuadrícula del tablero de juego si es necesario
 root = tk.Tk()
 buttonUpdate = tk.Button(root, text="Actualizar", command=update_grid)
 buttonUpdate.pack()
