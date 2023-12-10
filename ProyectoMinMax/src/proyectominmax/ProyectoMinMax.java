@@ -4,11 +4,10 @@
  */
 package proyectominmax;
 
-import agents.Receptor;
-import controllers.MinMaxFunctions;
-import java.util.List;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import Comportamientos.Emisor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -20,7 +19,14 @@ public class ProyectoMinMax {
     
     public static void main(String[] args) {
        
-        Receptor receptor = new Receptor();
+        Emisor jugar = new Emisor();
+        
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        // Programar la tarea para ejecutarse cada 3 segundos
+        scheduler.scheduleAtFixedRate(() -> {
+            jugar.RealizarJugada();
+        }, 0, 3, TimeUnit.SECONDS);
         
 //        String jsonString = "[[\" \", \" \", \" \"], [\" \", \" \", \" \"], [\"C\", \"T\", \" \"]]";
 //       //String jsonString = "[[\" \", \" \", \" \"], [\"X\", \" \", \" \"], [\" \", \"O\", \" \"]]";

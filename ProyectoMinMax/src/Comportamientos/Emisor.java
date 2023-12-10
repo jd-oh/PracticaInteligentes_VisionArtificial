@@ -11,30 +11,53 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.List;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  *
  * @author CSS
  */
-public class ComportamientoSimpleReceptor extends SimpleBehaviour {
+public class Emisor {
 
-    Agent miAgente;
-    String respuesta = "";
+    String respuesta;
 
-    public ComportamientoSimpleReceptor(Agent miAgente) {
-        this.miAgente = miAgente;
+    public Emisor() {
+        
     }
 
     public String getRespuesta() {
         return respuesta;
     }
 
-    @Override
-    public void action() {
-        ACLMessage mensajeRecibido = this.miAgente.blockingReceive();
-        if (mensajeRecibido != null) {
-            try {
-                
-                respuesta = mensajeRecibido.getContent();
+    public void RealizarJugada() {
+        String apiUrl = "http://127.0.0.1:5000/get-game-state";
+
+        try {
+            // Crear una URL y abrir la conexión
+            URL url = new URL(apiUrl);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+            // Configurar el tipo de solicitud y método
+            con.setRequestMethod("GET");
+
+            // Obtener la respuesta de la API
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Leer la respuesta de la API
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // Guardar la respuesta en la variable "respuesta"
+                respuesta = response.toString();
                 
                 ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -55,11 +78,17 @@ public class ComportamientoSimpleReceptor extends SimpleBehaviour {
         } catch (Exception e) {
             e.printStackTrace();
         }
-            } catch (Exception e) {
-            }
+            
         } else {
-            System.out.println("Receptor no me ha llegado mensaje");
+                System.out.println("La solicitud GET no fue exitosa. Código de respuesta: " + responseCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+    
+    public void anunciarJugada(){
+        
     }
     
      private static void imprimirTablero(List<List<String>> tablero) {
@@ -68,9 +97,5 @@ public class ComportamientoSimpleReceptor extends SimpleBehaviour {
         }
     }
 
-    @Override
-    public boolean done() {
-        return true;
-    }
 
 }
