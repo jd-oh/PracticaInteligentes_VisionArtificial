@@ -63,7 +63,7 @@ public class MinMaxFunctions {
         for (int i = 0; i < tablero.size(); i++) {
             for (int j = 0; j < tablero.get(i).size(); j++) {
                 if (tablero.get(i).get(j).equals(" ")) {
-                    tablero.get(i).set(j, "T");
+                    tablero.get(i).set(j, "C");
                     mejorValor = Math.max(mejorValor, minimax(tablero, profundidad + 1, alfa, beta, false));
                     tablero.get(i).set(j, " "); // Deshacer el movimiento
 
@@ -80,7 +80,7 @@ public class MinMaxFunctions {
         for (int i = 0; i < tablero.size(); i++) {
             for (int j = 0; j < tablero.get(i).size(); j++) {
                 if (tablero.get(i).get(j).equals(" ")) {
-                    tablero.get(i).set(j, "C");
+                    tablero.get(i).set(j, "T");
                     mejorValor = Math.min(mejorValor, minimax(tablero, profundidad + 1, alfa, beta, true));
                     tablero.get(i).set(j, " "); // Deshacer el movimiento
 
