@@ -63,7 +63,7 @@ public class MinMaxFunctions {
         for (int i = 0; i < tablero.size(); i++) {
             for (int j = 0; j < tablero.get(i).size(); j++) {
                 if (tablero.get(i).get(j).equals(" ")) {
-                    tablero.get(i).set(j, "C");
+                    tablero.get(i).set(j, "T");
                     mejorValor = Math.max(mejorValor, minimax(tablero, profundidad + 1, alfa, beta, false));
                     tablero.get(i).set(j, " "); // Deshacer el movimiento
 
@@ -80,7 +80,7 @@ public class MinMaxFunctions {
         for (int i = 0; i < tablero.size(); i++) {
             for (int j = 0; j < tablero.get(i).size(); j++) {
                 if (tablero.get(i).get(j).equals(" ")) {
-                    tablero.get(i).set(j, "T");
+                    tablero.get(i).set(j, "C");
                     mejorValor = Math.min(mejorValor, minimax(tablero, profundidad + 1, alfa, beta, true));
                     tablero.get(i).set(j, " "); // Deshacer el movimiento
 
@@ -96,7 +96,7 @@ public class MinMaxFunctions {
 }
    
 
-    private static boolean esVictoria(List<List<String>> tablero, String jugador) {
+    public static boolean esVictoria(List<List<String>> tablero, String jugador) {
     // Verificar filas
     for (List<String> fila : tablero) {
         if (fila.stream().allMatch(casilla -> casilla.equals(jugador))) {
@@ -132,9 +132,9 @@ public class MinMaxFunctions {
     private static boolean esEmpate(List<List<String>> tablero) {
     for (List<String> fila : tablero) {
         if (fila.contains(" ")) {
-            return false; // Todavía hay al menos una casilla vacía, no es empate
+            return false;
         }
     }
-    return true; // Todas las casillas están ocupadas, es empate
+    return true;
 }
 }
