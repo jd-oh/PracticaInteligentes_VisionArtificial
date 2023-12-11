@@ -54,7 +54,7 @@ public class Emisor {
                 }
                 in.close();
 
-                if (respuesta.equalsIgnoreCase(response.toString())) {
+                if (!respuesta.equalsIgnoreCase(response.toString())) {
 
                     respuesta = response.toString();
 
@@ -66,13 +66,12 @@ public class Emisor {
                         System.out.println("Tablero Actual:");
                         imprimirTablero(tablero);
 
-                        
                         // Calcular la próxima jugada usando el algoritmo minimax
                         int[] movimiento = function.encontrarMejorMovimiento(tablero, "C");
-                        
+
                         String jugada = "Fila: " + movimiento[0] + ", Columna: " + movimiento[1];
-                        this.anunciarJugada(""+movimiento[1]);
-                        
+                        this.anunciarJugada("" + movimiento[1]);
+
                         System.out.println("\nPróxima Jugada:");
                         System.out.println(jugada);
 
@@ -101,10 +100,8 @@ public class Emisor {
             // Habilitar el envío de datos
             con.setDoOutput(true);
 
-            
             String datos = "{\"mensaje\":\"" + jugada + "\"}";
 
-            
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = datos.getBytes("utf-8");
                 os.write(input, 0, input.length);
